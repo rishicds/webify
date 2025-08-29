@@ -42,7 +42,7 @@ export default function LoginPage() {
       } else if (!userData.role) {
         router.push('/onboarding');
       } else if (userData.role === 'student') {
-        router.push('/');
+        router.push('/dashboard/browse-events');
       } else {
         router.push('/dashboard');
       }
