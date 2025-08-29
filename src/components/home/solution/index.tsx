@@ -25,15 +25,10 @@ function Solutions() {
               className='flex flex-col gap-6 items-center md:max-w-3xl mx-auto'>
               <div className='flex flex-col gap-3 items-center text-center'>
                 <h2 className='text-3xl md:text-5xl dark:text-dark_black'>
-                  Innovative Solutions for{' '}
-                  <span className='instrument-font italic font-normal dark:text-black/70'>
-                    Bold Brands
-                  </span>
+                  Welcome to Konvele
                 </h2>
                 <p className='dark:text-dark_black'>
-                  Looking to elevate your brand? We craft immersive experiences
-                  that captivate, engage, and make your business unforgettable
-                  in every interaction.
+                  Konvele is a vibrant community-driven platform that blends conversations, meetups, events, and learning into one seamless experience. It’s designed as a dynamic hub where people can connect through meaningful discussions, discover and attend engaging events, and gain new skills through collaborative learning sessions. Whether it’s networking with like-minded peers, joining interactive workshops, or sharing knowledge, Konvele empowers individuals and organizations to build lasting connections while growing together.
                 </p>
               </div>
               <Link
