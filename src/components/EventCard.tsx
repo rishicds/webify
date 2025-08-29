@@ -13,7 +13,16 @@ import { ArrowRight, Calendar, MapPin, Tag } from 'lucide-react';
 import type { Event } from '@/lib/types';
 
 export function EventCard({ event }: { event: Event }) {
-  const eventDate = new Date(event.date.seconds * 1000);
+  let eventDate: Date;
+  if (event.date instanceof Date) {
+    eventDate = event.date;
+  } else if (typeof event.date === "object" && event.date !== null && "seconds" in event.date) {
+    eventDate = new Date(event.date.seconds * 1000);
+  } else if (typeof event.date === "string" || typeof event.date === "number") {
+    eventDate = new Date(event.date);
+  } else {
+    eventDate = new Date(); // fallback to now if invalid
+  }
 
 
   return (

@@ -38,7 +38,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog"
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 

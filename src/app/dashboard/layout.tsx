@@ -85,7 +85,15 @@ export default function DashboardLayout({
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
-                 <SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild tooltip="My Registrations">
+                    <Link href="/dashboard/my-registrations">
+                      <Calendar />
+                      <span>My Registrations</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem>
                   <SidebarMenuButton asChild tooltip="My Posts">
                     <Link href="/dashboard/my-posts">
                       <FileText />
@@ -93,11 +101,19 @@ export default function DashboardLayout({
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
-                 <SidebarMenuItem>
+                <SidebarMenuItem>
                   <SidebarMenuButton asChild tooltip="Browse Events">
-                    <Link href="/">
+                    <Link href="/dashboard/browse-events">
                       <Calendar />
                       <span>Browse Events</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild tooltip="Browse Blog Posts">
+                    <Link href="/dashboard/browse-blogs">
+                      <FileText />
+                      <span>Browse Blog Posts</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -196,7 +212,7 @@ export default function DashboardLayout({
         </SidebarFooter>
       </Sidebar>
       <SidebarInset>
-        <div className="p-4 sm:p-6 lg:p-8">{children}</div>
+        <div className="p-4 ml-28 sm:p-6 lg:p-8">{children}</div>
       </SidebarInset>
     </div>
   );

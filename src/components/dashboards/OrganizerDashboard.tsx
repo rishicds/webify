@@ -91,15 +91,15 @@ export default function OrganizerDashboard() {
     : events.find(e => e.id === selectedEventId)?.title || 'Select an Event';
 
   return (
-    <div className="space-y-8">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+    <div className="space-y-4 md:space-y-6 lg:space-y-8 px-2 md:px-4">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 md:gap-4">
         <div>
-          <h1 className="text-3xl font-bold font-headline">Welcome, Organizer!</h1>
-          <p className="text-muted-foreground">Here&apos;s a snapshot of your events.</p>
+          <h1 className="text-2xl md:text-3xl font-bold font-headline mb-1">Welcome, Organizer!</h1>
+          <p className="text-muted-foreground text-sm md:text-base">Here&apos;s a snapshot of your events.</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-1 md:gap-2">
             <Select onValueChange={setSelectedEventId} defaultValue="all">
-                <SelectTrigger className="w-[280px]">
+                <SelectTrigger className="w-[180px] md:w-[220px] lg:w-[260px] h-10 md:h-11 text-sm md:text-base">
                     <SelectValue placeholder="Select an event" />
                 </SelectTrigger>
                 <SelectContent>
@@ -109,7 +109,7 @@ export default function OrganizerDashboard() {
                     ))}
                 </SelectContent>
             </Select>
-            <Button asChild>
+            <Button asChild className="h-10 md:h-11 px-4 md:px-6 text-sm md:text-base">
             <Link href="/dashboard/events/new">
                 <PlusCircle className="mr-2 h-4 w-4" /> Create Event
             </Link>
@@ -117,7 +117,7 @@ export default function OrganizerDashboard() {
         </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-2 md:gap-3 lg:gap-4 md:grid-cols-2 lg:grid-cols-3">
          <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Events</CardTitle>
@@ -183,17 +183,17 @@ export default function OrganizerDashboard() {
         </Card>
       </div>
 
-       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        <Card className="lg:col-span-4">
-            <CardHeader>
-            <CardTitle>Registrations Summary</CardTitle>
-            <CardDescription>
-                {selectedEventId === 'all' ? 'A summary of event registrations per month this year.' : `Daily registrations for ${selectedEventTitle}`}
-            </CardDescription>
-            </CardHeader>
-            <CardContent>
-                {loading ? <div className="h-[250px] w-full flex items-center justify-center"><Loader2 className="h-8 w-8 animate-spin" /></div> : (
-                <ChartContainer config={chartConfig} className="h-[250px] w-full">
+  <div className="grid gap-2 md:gap-3 lg:gap-4 md:grid-cols-2 lg:grid-cols-7">
+   <Card className="lg:col-span-4">
+      <CardHeader className="pb-2">
+      <CardTitle className="text-base md:text-lg">Registrations Summary</CardTitle>
+      <CardDescription className="text-xs md:text-sm">
+        {selectedEventId === 'all' ? 'A summary of event registrations per month this year.' : `Daily registrations for ${selectedEventTitle}`}
+      </CardDescription>
+      </CardHeader>
+      <CardContent className="pt-0">
+        {loading ? <div className="h-[180px] md:h-[220px] w-full flex items-center justify-center"><Loader2 className="h-7 w-7 animate-spin" /></div> : (
+        <ChartContainer config={chartConfig} className="h-[180px] md:h-[220px] w-full">
                     <RechartsBarChart data={analytics?.registrationsByMonth} accessibilityLayer>
                     <CartesianGrid vertical={false} />
                     <XAxis
@@ -219,40 +219,40 @@ export default function OrganizerDashboard() {
             </CardContent>
         </Card>
 
-        <Card className="lg:col-span-3">
-             <CardHeader>
-                <CardTitle>Top Performing Events</CardTitle>
-                <CardDescription>
-                    Your most popular events by registration.
-                </CardDescription>
-            </CardHeader>
-            <CardContent>
-                 {loading ? <div className="h-[250px] w-full flex items-center justify-center"><Loader2 className="h-8 w-8 animate-spin" /></div> : (
-                   analytics && analytics.topEvents.length > 0 ? (
-                     <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead>Event</TableHead>
-                                <TableHead className="text-right">Registrations</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {analytics.topEvents.map(event => (
-                                <TableRow key={event.id}>
-                                    <TableCell className="font-medium truncate max-w-xs">{event.title}</TableCell>
-                                    <TableCell className="text-right font-bold">{event.registrations}</TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                     </Table>
-                   ) : (
-                      <div className="h-[250px] w-full flex items-center justify-center text-muted-foreground">
-                        No registration data available.
-                      </div>
-                   )
-                 )}
-            </CardContent>
-        </Card>
+    <Card className="lg:col-span-3">
+       <CardHeader className="pb-2">
+        <CardTitle className="text-base md:text-lg">Top Performing Events</CardTitle>
+        <CardDescription className="text-xs md:text-sm">
+          Your most popular events by registration.
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="pt-0">
+         {loading ? <div className="h-[180px] md:h-[220px] w-full flex items-center justify-center"><Loader2 className="h-7 w-7 animate-spin" /></div> : (
+           analytics && analytics.topEvents.length > 0 ? (
+           <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Event</TableHead>
+                <TableHead className="text-right">Registrations</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {analytics.topEvents.map(event => (
+                <TableRow key={event.id}>
+                  <TableCell className="font-medium truncate max-w-xs">{event.title}</TableCell>
+                  <TableCell className="text-right font-bold">{event.registrations}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+           </Table>
+           ) : (
+            <div className="h-[180px] md:h-[220px] w-full flex items-center justify-center text-muted-foreground">
+            No registration data available.
+            </div>
+           )
+         )}
+      </CardContent>
+    </Card>
       </div>
 
     </div>

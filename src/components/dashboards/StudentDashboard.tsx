@@ -8,6 +8,7 @@ import { Loader2, Calendar, Ticket } from "lucide-react";
 import { EventCard } from "@/components/EventCard";
 import { RecommendedEvents } from "../RecommendedEvents";
 import { Separator } from "../ui/separator";
+import Link from "next/link";
 
 export default function StudentDashboard() {
   const { user } = useAuth();
