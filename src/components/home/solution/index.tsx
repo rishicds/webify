@@ -32,8 +32,8 @@ function Solutions() {
                 </p>
               </div>
               <Link
-                href='/contact'
-                className='group w-fit text-white font-medium bg-dark_black rounded-full flex items-center gap-4 py-2 pl-5 pr-2 hover:bg-transparent border border-dark_black'>
+                href='/login'
+                className='group w-fit text-white font-medium bg-pink-300 rounded-full flex items-center gap-4 py-2 pl-5 pr-2 hover:bg-pink-600 border border-dark_black'>
                 <span className='group-hover:translate-x-9 group-hover:text-dark_black transform transition-transform duration-200 ease-in-out'>
                   Let’s Collaborate
                 </span>

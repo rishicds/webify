@@ -20,7 +20,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <div className="container mx-auto py-6 text-center text-sm text-muted-foreground">
           <p>
             &copy; {new Date().getFullYear()} Konvele Connect. All rights
-            reserved.
+            reserved. Made with ❤️ by Rishi.
           </p>
         </div>
       </footer>

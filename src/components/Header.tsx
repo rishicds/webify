@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Rocket, Menu, LogOut } from 'lucide-react';
+import { Rocket, Menu, LogOut, Tickets } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { usePathname, useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
@@ -40,8 +40,8 @@ export function Header() {
           href="/"
           className="flex items-center gap-2 font-bold text-lg"
         >
-          <Rocket className="w-6 h-6 text-primary" />
-          <span className="font-headline">Konvele Connect</span>
+          <Tickets className="w-6 h-6 text-primary" />
+          <span className="font-headline">Konvele</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6">
           {routes.map((route) => {

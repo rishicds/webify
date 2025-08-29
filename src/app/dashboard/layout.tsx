@@ -85,14 +85,7 @@ export default function DashboardLayout({
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
-                <SidebarMenuItem>
-                  <SidebarMenuButton asChild tooltip="My Registrations">
-                    <Link href="/dashboard/my-registrations">
-                      <Calendar />
-                      <span>My Registrations</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
+                
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild tooltip="My Posts">
                     <Link href="/dashboard/my-posts">

@@ -93,27 +93,27 @@ const innovationList: innovation[] = [
 
 const onlinePresenceList: onlinePresence[] = [
   {
-    image: '/images/home/onlinePresence/online_img_1.jpg',
-    title: 'FlowBank',
-    tag: ['UX Research', 'Interface Design'],
+    image: 'img1.png',
+    title: 'Organiser Dashboard',
+    tag: ['Admin Tools', 'Analytics', 'User Management'],
     link: 'https://www.wrappixel.com/',
   },
   {
-    image: '/images/home/onlinePresence/online_img_2.jpg',
-    title: 'Academy.co',
-    tag: ['Product Design', 'Interaction Design'],
+    image: 'img2.png',
+    title: 'Event Page',
+    tag: ['Event Management', 'Live Updates', 'Responsive Design'],
     link: 'https://www.wrappixel.com/',
   },
   {
-    image: '/images/home/onlinePresence/online_img_3.jpg',
-    title: 'Genome',
-    tag: ['Brand identity design', 'UX Research'],
+    image: 'img3.png',
+    title: 'Unique QR Tickets',
+    tag: ['QR Code', 'Security', 'Ticketing System'],
     link: 'https://www.wrappixel.com/',
   },
   {
-    image: '/images/home/onlinePresence/online_img_4.jpg',
-    title: 'Hotto',
-    tag: ['Visual Storytelling', 'Web & Mobile Design'],
+    image: 'img4.png',
+    title: 'Student blogs',
+    tag: ['Content Creation', 'Storytelling', 'Community'],
     link: 'https://www.wrappixel.com/',
   },
 ]
@@ -242,32 +242,49 @@ const faqList: faq[] = [
   },
 ]
 
-const achievementsList: achievements[] = [
+
+const testimonialsList = [
   {
-    icon: '/images/home/achievement/framer_award.svg',
-    dark_icon: '/images/home/achievement/dark_framer_award.svg',
-    sub_title: 'Framer Awards',
-    title:
-      'Celebrated for cutting-edge interaction design and seamless user experiences.',
+    name: 'Rajarshi Mondal',
+    avatar: '/images/home/avatar_1.jpg',
+    quote: 'This platform helped me connect with amazing mentors and boosted my confidence to pursue my dream career!',
+    title: 'B.Tech Student',
+    year: '2025',
+  },
+  {
+    name: 'Nusrat Jahan',
+    avatar: '/images/home/avatar_2.jpg',
+    quote: 'The events and resources here are top-notch. I learned so much and made lifelong friends.',
+    title: 'MBA Candidate',
     year: '2024',
-    url: 'https://www.framer.com/@wrap-pixel/',
   },
   {
-    icon: '/images/home/achievement/dribble_award.svg',
-    dark_icon: '/images/home/achievement/dribble_award.svg',
-    sub_title: 'Dribbble Awards',
-    title: 'Recognized for creative excellence and innovative design solutions',
+    name: 'Debayudh Basu',
+    avatar: '/images/home/avatar_3.jpg',
+    quote: 'I never thought online learning could be this engaging. The community is so supportive!',
+    title: 'Design Major',
+    year: '2025',
+  },
+  {
+    name: 'Nirjhar Barma',
+    avatar: '/images/home/avatar_4.jpg',
+    quote: 'From workshops to networking, every experience here has been valuable for my growth.',
+    title: 'Engineering Student',
     year: '2023',
-    url: 'https://www.framer.com/@wrap-pixel/',
   },
   {
-    icon: '/images/home/achievement/awward_award.svg',
-    dark_icon: '/images/home/achievement/dark_awward_award.svg',
-    sub_title: 'awwwards Awards',
-    title:
-      'Honored with the Best Website Design for creativity, usability, and innovation.',
-    year: '2022',
-    url: 'https://www.framer.com/@wrap-pixel/',
+    name: 'Swastik Hore',
+    avatar: '/images/home/avatar_5.png',
+    quote: 'The peer mentoring program completely transformed my approach to problem-solving and career planning.',
+    title: 'Computer Science Student',
+    year: '2025',
+  },
+  {
+    name: 'Pragya Singh',
+    avatar: '/images/home/avatar_6.png',
+    quote: 'Being part of this community has opened up so many opportunities I never knew existed.',
+    title: 'IT Student',
+    year: '2024',
   },
 ]
 
@@ -282,6 +299,6 @@ export const GET = async () => {
     WebResultTagList,
     startupPlanList,
     faqList,
-    achievementsList,
+    testimonialsList,
   });
 };

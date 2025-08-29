@@ -1,8 +1,10 @@
-'use client'
+"use client"
 import Image from 'next/image'
 import CountUp from 'react-countup'
 import { useInView } from 'react-intersection-observer'
 import { useEffect, useState } from 'react'
+import Lottie from 'lottie-react'
+import animationData from '../../../app/Concept Draw 3d (1).json'
 
 function WebResult() {
   const [data, setData] = useState<any>(null);
@@ -33,11 +35,16 @@ function WebResult() {
       <div className='2xl:py-20 py-11  from-white via-purple-50/40 to-lavender-50/60 dark:bg-gradient-to-br dark:from-purple-950/20 dark:via-purple-900/10 dark:to-purple-800/20'>
         <div className='container'>
           <div className='flex flex-col lg:gap-16 gap-5'>
-            <div className='flex flex-col items-center justify-center text-center gap-3'>
-              <h2 className='max-w-6xl bg-gradient-to-r from-purple-700 via-purple-600 to-purple-800 bg-clip-text text-transparent dark:from-purple-300 dark:via-lavender-200 dark:to-purple-400'>
-                Building vibrant communities through meaningful connections, 
-                collaborative learning, and engaging experiences powered by
-              </h2>
+            <div className='flex flex-col md:flex-row items-center justify-center text-center md:text-left gap-3'>
+              <div className='flex items-center gap-6'>
+                <h2 className='max-w-6xl bg-gradient-to-r from-purple-700 via-purple-600 to-purple-800 bg-clip-text text-transparent dark:from-purple-300 dark:via-lavender-200 dark:to-purple-400'>
+                  Building vibrant communities through meaningful connections, 
+                  collaborative learning, and engaging experiences powered by
+                </h2>
+                <div className='w-36 h-36 md:w-36 md:h-36'>
+                  <Lottie animationData={animationData} loop={true} style={{ width: '100%', height: '100%' }} />
+                </div>
+              </div>
               <div>
                 <h2>
                   {data?.map((items:any, index:any) => (

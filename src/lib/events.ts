@@ -150,6 +150,21 @@ export async function getEventAttendees(eventId: string): Promise<Registration[]
     return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Registration));
 }
 
+export async function isUserRegisteredForEvent(userId: string, eventId: string): Promise<boolean> {
+    const q = query(registrationsCollection, where("eventId", "==", eventId), where("userId", "==", userId));
+    const querySnapshot = await getDocs(q);
+    return !querySnapshot.empty;
+}
+
+export async function getUserRegistrationForEvent(userId: string, eventId: string): Promise<Registration | null> {
+    const q = query(registrationsCollection, where("eventId", "==", eventId), where("userId", "==", userId));
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.empty) {
+        return null;
+    }
+    return { id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data() } as Registration;
+}
+
 export async function getRegisteredEventsForUser(userId: string): Promise<Event[]> {
     const registrationsQuery = query(registrationsCollection, where("userId", "==", userId));
     const registrationsSnapshot = await getDocs(registrationsQuery);

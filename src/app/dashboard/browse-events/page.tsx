@@ -63,76 +63,118 @@ export default function BrowseEventsPage() {
   }, [searchTerm, category, allEvents]);
 
   return (
-    <div className="space-y-6 md:space-y-8 px-4 md:px-6 lg:px-8">
-      <div className="text-center md:text-left">
-        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold font-headline">Browse Events</h1>
-        <p className="text-sm md:text-base text-muted-foreground mt-2">
-          Discover and explore all available events.
-        </p>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+      <div className="container mx-auto px-4 md:px-6 lg:px-8 py-8 md:py-12">
+        <div className="space-y-8 md:space-y-12">
+          {/* Header Section */}
+          <div className="text-center space-y-4">
+            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
+              <Tag className="h-4 w-4" />
+              Discover Events
+            </div>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-headline bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+              Browse Events
+            </h1>
+            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Discover and explore all available events. Find the perfect event to attend and connect with like-minded people.
+            </p>
+          </div>
 
-      <div className="flex flex-col gap-4 p-4 md:p-6 border rounded-lg bg-card shadow-sm max-w-4xl mx-auto">
-        <div className="relative flex-grow">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 md:h-5 md:w-5 text-muted-foreground" />
-          <Input
-            placeholder="Search for events..."
-            className="pl-10 text-sm md:text-base bg-secondary h-11 md:h-12"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
-        <div className="flex flex-col sm:flex-row gap-3">
-          <Select value={category} onValueChange={setCategory}>
-            <SelectTrigger className="w-full sm:w-[200px] text-sm md:text-base bg-secondary h-11 md:h-12">
-              <div className="flex items-center gap-2">
-                <Tag className="h-4 w-4 md:h-5 md:w-5 text-muted-foreground" />
-                <SelectValue placeholder="All Categories" />
-              </div>
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Categories</SelectItem>
-              <SelectItem value="Tech">Tech</SelectItem>
-              <SelectItem value="Business">Business</SelectItem>
-              <SelectItem value="Marketing">Marketing</SelectItem>
-              <SelectItem value="Design">Design</SelectItem>
-              <SelectItem value="Science">Science</SelectItem>
-            </SelectContent>
-          </Select>
-          <Button size="lg" className="text-sm md:text-base h-11 md:h-12 px-6 w-full sm:w-auto" onClick={handleSearch}>
-            <Search className="mr-2 h-4 w-4 md:h-5 md:w-5" />
-            Find Events
-          </Button>
-        </div>
-      </div>
-
-      {loading ? (
-         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <Card key={i} className="bg-transparent border-none shadow-none dark:shadow-none">
-              <Skeleton className="h-40 md:h-48 w-full rounded-lg" />
-              <CardContent className="p-3 md:p-4 space-y-2">
-                 <Skeleton className="h-5 md:h-6 w-3/4" />
-                 <Skeleton className="h-3 md:h-4 w-1/2" />
-                 <Skeleton className="h-3 md:h-4 w-1/3" />
+          {/* Search and Filter Section */}
+          <div className="max-w-4xl mx-auto">
+            <Card className="bg-gradient-to-r from-card/80 to-card/60 backdrop-blur-sm border border-border/50 shadow-xl">
+              <CardContent className="p-6 md:p-8">
+                <div className="space-y-6">
+                  <div className="relative">
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                    <Input
+                      placeholder="Search for events by title, description, or keywords..."
+                      className="pl-12 text-base bg-background/50 border-border/50 h-14 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition-all duration-200"
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-4 items-center">
+                    <div className="flex-1 w-full sm:w-auto">
+                      <Select value={category} onValueChange={setCategory}>
+                        <SelectTrigger className="w-full text-base bg-background/50 border-border/50 h-14 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary/50">
+                          <div className="flex items-center gap-3">
+                            <Tag className="h-5 w-5 text-muted-foreground" />
+                            <SelectValue placeholder="All Categories" />
+                          </div>
+                        </SelectTrigger>
+                        <SelectContent className="rounded-xl">
+                          <SelectItem value="all" className="text-base py-3">All Categories</SelectItem>
+                          <SelectItem value="Tech" className="text-base py-3">Tech</SelectItem>
+                          <SelectItem value="Business" className="text-base py-3">Business</SelectItem>
+                          <SelectItem value="Marketing" className="text-base py-3">Marketing</SelectItem>
+                          <SelectItem value="Design" className="text-base py-3">Design</SelectItem>
+                          <SelectItem value="Science" className="text-base py-3">Science</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <Button
+                      size="lg"
+                      className="text-base h-14 px-8 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 rounded-xl w-full sm:w-auto"
+                      onClick={handleSearch}
+                    >
+                      <Search className="mr-2 h-5 w-5" />
+                      Find Events
+                    </Button>
+                  </div>
+                </div>
               </CardContent>
-              <CardFooter className="p-3 md:p-4">
-                <Skeleton className="h-9 md:h-10 w-full rounded-md" />
-              </CardFooter>
             </Card>
-          ))}
-         </div>
-      ) : filteredEvents.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
-          {filteredEvents.map((event) => (
-            <EventCard key={event.id} event={event} />
-          ))}
+          </div>
+
+          {/* Events Grid Section */}
+          {loading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 md:gap-8">
+              {Array.from({ length: 8 }).map((_, i) => (
+                <Card key={i} className="bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-sm border border-border/50 shadow-lg">
+                  <Skeleton className="h-48 w-full rounded-t-lg" />
+                  <CardContent className="p-5 space-y-3">
+                    <Skeleton className="h-6 w-3/4" />
+                    <Skeleton className="h-4 w-1/2" />
+                    <Skeleton className="h-4 w-2/3" />
+                    <Skeleton className="h-4 w-full" />
+                    <Skeleton className="h-4 w-3/4" />
+                  </CardContent>
+                  <CardFooter className="p-5 pt-0">
+                    <Skeleton className="h-12 w-full rounded-xl" />
+                  </CardFooter>
+                </Card>
+              ))}
+            </div>
+          ) : filteredEvents.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-6 md:gap-8">
+              {filteredEvents.map((event) => (
+                <EventCard key={event.id} event={event} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-16 md:py-20">
+              <div className="max-w-md mx-auto space-y-4">
+                <div className="w-16 h-16 mx-auto bg-muted rounded-full flex items-center justify-center">
+                  <Search className="h-8 w-8 text-muted-foreground" />
+                </div>
+                <h2 className="text-2xl md:text-3xl font-semibold">No Events Found</h2>
+                <p className="text-muted-foreground text-lg">Try adjusting your search or filter criteria to find more events.</p>
+                <Button
+                  variant="outline"
+                  className="mt-4"
+                  onClick={() => {
+                    setSearchTerm('');
+                    setCategory('all');
+                  }}
+                >
+                  Clear Filters
+                </Button>
+              </div>
+            </div>
+          )}
         </div>
-      ) : (
-        <div className="text-center py-12 md:py-16 px-4">
-          <h2 className="text-xl md:text-2xl font-semibold mb-2">No Events Found</h2>
-          <p className="text-sm md:text-base text-muted-foreground">Try adjusting your search or filter criteria.</p>
-        </div>
-      )}
+      </div>
     </div>
   );
 }

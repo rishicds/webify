@@ -3,14 +3,14 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getEventById } from '@/lib/events';
-import type { Event } from '@/lib/types';
+import { getEventById, isUserRegisteredForEvent, getUserRegistrationForEvent } from '@/lib/events';
+import type { Event, Registration } from '@/lib/types';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { Calendar, MapPin, Ticket, User, Loader2, MessageSquare, Mic, FileQuestion, Trophy } from 'lucide-react';
+import { Calendar, MapPin, Ticket, User, Loader2, MessageSquare, Mic, FileQuestion, Trophy, CheckCircle } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { EventChat } from '@/components/EventChat';
@@ -24,6 +24,8 @@ export default function EventPage({ params }: { params: { id: string } }) {
   const { user } = useAuth();
   const [event, setEvent] = useState<Event | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [userRegistration, setUserRegistration] = useState<Registration | null>(null);
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -36,6 +38,20 @@ export default function EventPage({ params }: { params: { id: string } }) {
     };
     fetchEvent();
   }, [params.id]);
+
+  useEffect(() => {
+    const checkRegistrationStatus = async () => {
+      if (user && event) {
+        const registered = await isUserRegisteredForEvent(user.uid, event.id);
+        setIsRegistered(registered);
+        if (registered) {
+          const registration = await getUserRegistrationForEvent(user.uid, event.id);
+          setUserRegistration(registration);
+        }
+      }
+    };
+    checkRegistrationStatus();
+  }, [user, event]);
 
   if (loading) {
     return <div className="flex justify-center items-center h-screen"><Loader2 className="h-8 w-8 animate-spin text-primary" /></div>;
@@ -163,8 +179,17 @@ export default function EventPage({ params }: { params: { id: string } }) {
             <Card className="sticky top-24 shadow-lg">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Ticket className="h-6 w-6 text-primary" />
-                  <span>Register Now</span>
+                  {isRegistered ? (
+                    <>
+                      <CheckCircle className="h-6 w-6 text-green-500" />
+                      <span>You're Registered!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Ticket className="h-6 w-6 text-primary" />
+                      <span>Register Now</span>
+                    </>
+                  )}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -201,11 +226,28 @@ export default function EventPage({ params }: { params: { id: string } }) {
                     <Badge variant="outline">{event.category}</Badge>
                   </div>
                 </div>
+                {isRegistered && userRegistration && (
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 mt-1 text-green-500" />
+                    <div>
+                      <p className="font-semibold">Registration Status</p>
+                      <p className="text-muted-foreground">
+                        {userRegistration.checkedIn ? 'Checked In' : 'Registered'}
+                      </p>
+                    </div>
+                  </div>
+                )}
               </CardContent>
               <CardContent>
-                <Button size="lg" className="w-full" asChild>
-                  <Link href={`/ticket/${event.id}`}>Register for this Event</Link>
-                </Button>
+                {isRegistered ? (
+                  <Button size="lg" className="w-full" variant="outline" asChild>
+                    <Link href={`/ticket/${event.id}`}>View Your Ticket</Link>
+                  </Button>
+                ) : (
+                  <Button size="lg" className="w-full" asChild>
+                    <Link href={`/ticket/${event.id}`}>Register for this Event</Link>
+                  </Button>
+                )}
               </CardContent>
             </Card>
           </div>

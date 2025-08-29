@@ -3,6 +3,7 @@ import { Icon } from '@iconify/react/dist/iconify.js'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import Player from 'lottie-react'
 
 function OnlinePresence() {
   const [onlinePresenceList, setonlinePresenceList] = useState<any>(null);
@@ -25,17 +26,28 @@ function OnlinePresence() {
   return (
     <section id='work'>
       <div className='2xl:py-20 py-11'>
-        <div className='container'>
+        <div className='container'><span className="ml-4 w-16 h-16">
+                  <Player
+                    autoplay
+                    loop
+                    animationData={require('../../../app/Marketing Tools.json')}
+                    style={{ width: '300px', height: '164px' }}
+                  />
+                </span>
           <div className='flex flex-col justify-center items-center gap-10 md:gap-20'>
-            <div className='max-w-2xl text-center'>
-              <h2>
-                How we transformed a small business’s
+            <div className='max-w-2xl text-center flex flex-row items-center justify-center gap-4'>
+              <h2 className='text-3xl font-bold flex-row items-center'>
+                How we transformed all the University events
                 <span className='instrument-font italic font-normal dark:text-white/70'>
                   {' '}
                   online presence
                 </span>
+                
+                
               </h2>
+              
             </div>
+            
             <div className='grid md:grid-cols-2 gap-x-6 gap-y-8'>
               {onlinePresenceList?.map((items:any, index:any) => {
                 return (

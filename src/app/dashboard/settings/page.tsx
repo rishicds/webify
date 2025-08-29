@@ -30,6 +30,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
+import { Label } from "@/components/ui/label"
 
 const studentFormSchema = z.object({
   displayName: z.string().min(2, "Name must be at least 2 characters.").max(50, "Name must be less than 50 characters."),
