@@ -4,7 +4,6 @@
  * @fileOverview A flow to send an email blast to all attendees of an event.
  *
  * - sendEmailBlast - A function that handles sending the email blast.
- * - SendEmailBlastInput - The input type for the sendEmailBlast function.
  */
 
 import { ai } from '@/ai/genkit';
@@ -16,7 +15,8 @@ const SendEmailBlastInputSchema = z.object({
   subject: z.string().describe('The subject of the email.'),
   body: z.string().describe('The body of the email (can be HTML).'),
 });
-export type SendEmailBlastInput = z.infer<typeof SendEmailBlastInputSchema>;
+
+type SendEmailBlastInput = z.infer<typeof SendEmailBlastInputSchema>;
 
 // This is a placeholder for a real email sending function.
 // In a real-world app, this would use a service like SendGrid, Mailgun, or Nodemailer.

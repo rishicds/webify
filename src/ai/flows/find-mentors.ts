@@ -3,8 +3,6 @@
  * @fileOverview An AI flow to find suitable mentors for a user based on a desired skill.
  *
  * - findMentors - A function that returns a list of matched mentors.
- * - FindMentorsInput - The input type for the findMentors function.
- * - FindMentorsOutput - The return type for the findMentors function.
  */
 
 import { ai } from '@/ai/genkit';
@@ -12,19 +10,19 @@ import { z } from 'genkit';
 import { getAllUsers } from '@/lib/users';
 import type { MatchedMentor, UserData } from '@/lib/types';
 
-export const FindMentorsInputSchema = z.object({
+const FindMentorsInputSchema = z.object({
   userId: z.string().describe('The ID of the user searching for a mentor.'),
   skillToLearn: z.string().describe('The skill or topic the user wants to learn.'),
 });
-export type FindMentorsInput = z.infer<typeof FindMentorsInputSchema>;
 
-export const FindMentorsOutputSchema = z.object({
+const FindMentorsOutputSchema = z.object({
   matches: z.array(z.object({
     uid: z.string().describe("The user ID of the matched mentor."),
     reason: z.string().describe("A short, personalized reason why this person is a good match."),
   })).describe('A list of up to 5 potential mentors.'),
 });
-export type FindMentorsOutput = z.infer<typeof FindMentorsOutputSchema>;
+
+type FindMentorsInput = z.infer<typeof FindMentorsInputSchema>;
 
 
 const findMentorsFlow = ai.defineFlow(
@@ -100,10 +98,10 @@ export async function findMentors(input: FindMentorsInput): Promise<MatchedMento
           uid: mentorData.uid,
           displayName: mentorData.displayName,
           email: mentorData.email,
-          photoURL: mentorData.photoURL,
-          skills: mentorData.skills,
+          photoURL: mentorData.photoURL || null,
+          skills: mentorData.skills || [],
           reason: match.reason,
-      };
+      } as MatchedMentor;
   }).filter((m): m is MatchedMentor => m !== null);
   
   return matchedMentors;

@@ -4,29 +4,25 @@
  * @fileOverview Generates a post-event summary using AI by analyzing chat, Q&A, polls, and attendance data.
  *
  * - generateEventSummary - A function that generates the event summary.
- * - GenerateEventSummaryInput - The input type for the generateEventSummary function.
- * - GenerateEventSummaryOutput - The return type for the generateEventSummary function.
  */
 
 import {ai} from '@/ai/genkit';
-import {z} from 'genkit';
+import { z } from 'genkit';
 import { db } from '@/lib/firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import type { ChatMessage, Poll, Question, Registration, Vote } from '@/lib/types';
-
 
 const GenerateEventSummaryInputSchema = z.object({
   eventId: z.string().describe('The ID of the event to summarize.'),
   eventTitle: z.string().describe('The title of the event.'),
 });
 
-export type GenerateEventSummaryInput = z.infer<typeof GenerateEventSummaryInputSchema>;
-
 const GenerateEventSummaryOutputSchema = z.object({
   summary: z.string().describe('A summary of the event, including key feedback, attendance insights, and engagement metrics.'),
 });
 
-export type GenerateEventSummaryOutput = z.infer<typeof GenerateEventSummaryOutputSchema>;
+type GenerateEventSummaryInput = z.infer<typeof GenerateEventSummaryInputSchema>;
+type GenerateEventSummaryOutput = z.infer<typeof GenerateEventSummaryOutputSchema>;
 
 // Helper function to fetch data for the event
 async function getEventData(eventId: string) {

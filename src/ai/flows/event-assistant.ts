@@ -3,8 +3,6 @@
  * @fileOverview An AI assistant that can answer questions about a specific event.
  *
  * - answerQuestionAboutEvent - The main function to interact with the assistant.
- * - AnswerQuestionAboutEventInput - The input type for the flow.
- * - AnswerQuestionAboutEventOutput - The output type for the flow.
  */
 
 import { ai } from '@/ai/genkit';
@@ -17,12 +15,13 @@ const AnswerQuestionAboutEventInputSchema = z.object({
   eventId: z.string().describe('The ID of the event.'),
   query: z.string().describe('The user\'s question about the event.'),
 });
-export type AnswerQuestionAboutEventInput = z.infer<typeof AnswerQuestionAboutEventInputSchema>;
 
 const AnswerQuestionAboutEventOutputSchema = z.object({
   answer: z.string().describe('The AI\'s answer to the user\'s question.'),
 });
-export type AnswerQuestionAboutEventOutput = z.infer<typeof AnswerQuestionAboutEventOutputSchema>;
+
+type AnswerQuestionAboutEventInput = z.infer<typeof AnswerQuestionAboutEventInputSchema>;
+type AnswerQuestionAboutEventOutput = z.infer<typeof AnswerQuestionAboutEventOutputSchema>;
 
 // Tool to get event details
 const getEventDetailsTool = ai.defineTool(

@@ -4,8 +4,6 @@
  * @fileOverview An AI flow to recommend events to a user based on their registration history.
  *
  * - recommendEvents - A function that returns a list of recommended events.
- * - RecommendEventsInput - The input type for the recommendEvents function.
- * - RecommendEventsOutput - The return type for the recommendEvents function.
  */
 
 import { ai } from '@/ai/genkit';
@@ -13,11 +11,9 @@ import { z } from 'genkit';
 import { getAllEvents, getRegisteredEventsForUser } from '@/lib/events';
 import type { RecommendedEvent } from '@/lib/types';
 
-
 const RecommendEventsInputSchema = z.object({
   userId: z.string().describe('The ID of the user to get recommendations for.'),
 });
-export type RecommendEventsInput = z.infer<typeof RecommendEventsInputSchema>;
 
 const RecommendEventsOutputSchema = z.object({
   recommendations: z.array(z.object({
@@ -26,7 +22,9 @@ const RecommendEventsOutputSchema = z.object({
     reason: z.string().describe('A short, compelling reason why the user might be interested in this event.')
   })).describe('A list of recommended events.'),
 });
-export type RecommendEventsOutput = z.infer<typeof RecommendEventsOutputSchema>;
+
+type RecommendEventsInput = z.infer<typeof RecommendEventsInputSchema>;
+type RecommendEventsOutput = z.infer<typeof RecommendEventsOutputSchema>;
 
 const recommendEventsFlow = ai.defineFlow(
   {
